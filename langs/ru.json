@@ -1,0 +1,16 @@
+{
+    "header": {
+        "home": "Главная",
+        "about": "О нас"
+    },
+    "catalog": {
+        "catalogTXT": "Каталог"
+    },
+    "placeholder": {
+        "search": "Поиск"
+    },
+    "auth": {
+        "login": "Войти",
+        "signin": "Sign in"
+    }
+}

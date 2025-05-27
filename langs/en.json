@@ -1,0 +1,16 @@
+{
+    "header": {
+        "home": "Home",
+        "about": "About"
+    },
+    "catalog": {
+        "catalogTXT": "Catalog"
+    },
+    "placeholder": {
+        "search": "Search"
+    },
+    "auth": {
+        "login": "Log in",
+        "signin": "Sign in"
+    }
+}
