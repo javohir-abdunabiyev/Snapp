@@ -12,5 +12,11 @@
     "auth": {
         "login": "Log in",
         "signin": "Sign in"
+    },
+    "admin": {
+        "btn": "Log in",
+        "name": "Name",
+        "email": "Email",
+        "password": "Password"
     }
 }

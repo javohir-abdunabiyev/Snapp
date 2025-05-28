@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id     String  @id @default(uuid())
+  email  String  @unique
+  name   String
+  ban    Boolean @default(false)
+  basket Basket?
+  orders Order[]
+}
+
+model Admin {
+  id       String @id @default(uuid())
+  email    String @unique
+  password String
+  name     String
+  posts    Post[] @relation("AdminPosts")
+}
+
+model Post {
+  id        String  @id @default(uuid())
+  title     String
+  content   String?
+  imageUrl  String
+  price     Int
+  published Boolean @default(true)
+  author    Admin   @relation("AdminPosts", fields: [authorId], references: [id])
+  authorId  String
+}
+
+model Basket {
+  id     String       @id @default(uuid())
+  user   User         @relation(fields: [userId], references: [id])
+  userId String       @unique
+  items  BasketItem[]
+}
+
+model BasketItem {
+  id       String @id @default(uuid())
+  basket   Basket @relation(fields: [basketId], references: [id])
+  basketId String
+  title    String
+  imageUrl String
+  price    Int
+  quantity Int    @default(1)
+}
+
+model Order {
+  id        String      @id @default(uuid())
+  user      User        @relation(fields: [userId], references: [id])
+  userId    String
+  items     OrderItem[]
+  createdAt DateTime    @default(now()) // дата оформления группы товаров
+}
+
+model OrderItem {
+  id       String @id @default(uuid())
+  order    Order  @relation(fields: [orderId], references: [id])
+  orderId  String
+  title    String
+  imageUrl String
+  price    Int
+  quantity Int
+  status   String @default("PENDING")
+}

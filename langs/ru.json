@@ -12,5 +12,11 @@
     "auth": {
         "login": "Войти",
         "signin": "Sign in"
+    },
+    "admin": {
+        "btn" : "Войти",
+        "name": "Имя",
+        "email": "Электронная почта",
+        "password": "Пароль"
     }
 }
