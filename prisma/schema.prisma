@@ -9,12 +9,12 @@ datasource db {
 }
 
 model User {
-  id       String   @id @default(uuid())
-  email    String   @unique
-  name     String
-  ban      Boolean  @default(false)
-  basket   Basket?
-  orders   Order[]
+  id          String   @id @default(uuid())
+  email       String   @unique
+  name        String
+  ban         Boolean  @default(false)
+  basket      Basket?
+  orders      Order[]
 }
 
 model Admin {
@@ -38,14 +38,14 @@ model Post {
 
 model Basket {
   id       String   @id @default(uuid())
-  user     User     @relation(fields: [userId], references: [id])
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId   String   @unique
   items    BasketItem[]
 }
 
 model BasketItem {
   id        String  @id @default(uuid())
-  basket    Basket  @relation(fields: [basketId], references: [id])
+  basket    Basket  @relation(fields: [basketId], references: [id], onDelete: Cascade)
   basketId  String
   title     String
   imageUrl  String
@@ -55,15 +55,15 @@ model BasketItem {
 
 model Order {
   id        String       @id @default(uuid())
-  user      User         @relation(fields: [userId], references: [id])
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
   items     OrderItem[]
-  createdAt DateTime     @default(now()) // дата оформления группы товаров
+  createdAt DateTime     @default(now())
 }
 
 model OrderItem {
   id        String       @id @default(uuid())
-  order     Order        @relation(fields: [orderId], references: [id])
+  order     Order        @relation(fields: [orderId], references: [id], onDelete: Cascade)
   orderId   String
   title     String
   imageUrl  String

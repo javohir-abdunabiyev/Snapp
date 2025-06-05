@@ -1,37 +1,30 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
-import jwt from "jsonwebtoken";
+import { NextRequest, NextResponse } from "next/server";
+import { jwtVerify } from "jose";
 
-const JWT_SECRET = process.env.JWT_SECRET || "your_super_secret_key";
+const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET || "your_super_secret_key");
 
-export function middleware(req: NextRequest) {
-    const token = req.cookies.get("admin_token")?.value || null;
+export async function middleware(req: NextRequest) {
+    const token = req.cookies.get("admin_token")?.value;
 
-    // Защита /admin/dashboard
-    if (req.nextUrl.pathname.startsWith("/admin/dashboard/")) {
+    if (req.nextUrl.pathname.startsWith("/admin/dashboard")) {
         if (!token) {
             return NextResponse.redirect(new URL("/admin", req.url));
         }
-        try {
-            jwt.verify(token, JWT_SECRET);
-        } catch {
-            return NextResponse.redirect(new URL("/admin", req.url));
-        }
-    }
 
-    // Если авторизован и пытается зайти на /admin — редиректим на /admin/dashboard
-    if (req.nextUrl.pathname === "/admin" && token) {
         try {
-            jwt.verify(token, JWT_SECRET);
-            return NextResponse.redirect(new URL("/admin/dashboard/", req.url));
-        } catch {
-            // invalid token — показываем страницу логина
+            const { payload } = await jwtVerify(token, JWT_SECRET);
+            const email = payload.email;
+
+            if (!email) {
+                return NextResponse.redirect(new URL("/admin", req.url));
+            }
+
+            return NextResponse.next();
+        } catch (error) {
+            console.error("JWT verification error:", error);
+            return NextResponse.redirect(new URL("/admin", req.url));
         }
     }
 
     return NextResponse.next();
 }
-
-export const config = {
-    matcher: ["/admin", "/admin/dashboard/"],
-};

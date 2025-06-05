@@ -20,7 +20,7 @@ export default function AdminLoginPage() {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password }),
-                credentials: "include",  // <---- Добавлено сюда
+                credentials: "include",
             });
 
             if (res.ok) {
@@ -28,7 +28,7 @@ export default function AdminLoginPage() {
                 console.log("Ответ сервера:", data);
                 if (data.success) {
                     console.log("Успешный логин, редиректим");
-                    router.push("/admin/dashboard/");
+                    window.location.assign("/admin/dashboard/");
                 } else {
                     setError(data.message || "Неверный email или пароль");
                 }
@@ -62,7 +62,6 @@ export default function AdminLoginPage() {
                 className="max-w-[500px] h-[40px] text-white !text-[18px] placeholder:text-[20px]"
             />
             <Button
-                type="submit"
                 className="max-w-[500px] w-full font-bold text-[20px] h-[40px] rounded-[10px] text-black bg-white cursor-pointer"
             >
                 Войти

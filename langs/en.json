@@ -17,6 +17,16 @@
         "btn": "Log in",
         "name": "Name",
         "email": "Email",
-        "password": "Password"
+        "password": "Password",
+        "users": "Users",
+        "orders": "Orders",
+        "posts": "Posts",
+        "addPost": "Add Post",
+        "welcomePanel": "Welcome to the admin panel",
+        "selectPage": "Select a page",
+        "seeData": "To see the data",
+        "ban": "Banned",
+        "active": "Active",
+        "basket": "Basket"
     }
 }

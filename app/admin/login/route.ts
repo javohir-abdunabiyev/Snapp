@@ -30,7 +30,7 @@ export async function POST(req: Request) {
             path: "/",
             maxAge: 60 * 60,
             sameSite: "lax",
-            secure: false,
+            secure: true,
         });
 
         return response;
