@@ -1,8 +1,8 @@
 import {
-    generateUploadButton,
-    generateUploadDropzone,
+  generateUploadButton,
+  generateUploadDropzone,
 } from "@uploadthing/react";
-import { OurFileRouter } from "../api/uploadthing/core";
+import { OurFileRouter } from "../api/uploadthing/[[...uploadthing]]/core";
 
 
 export const UploadButton = generateUploadButton<OurFileRouter>();

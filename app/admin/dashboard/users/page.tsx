@@ -11,6 +11,7 @@ export default async function User() {
                     items: true,
                 },
             },
+            orders: true, // 👈 добавляем заказы
         },
     });
 
@@ -50,9 +51,10 @@ export default async function User() {
                                 alt=""
                                 className="!max-w-[100px] !max-h-[100px] rounded-full"
                             />
-                            <p className="text-sm mt-1 font-bold">
-                                🛒 {t("basket")}: {post.basket?.items.length ?? 0}
-                            </p>
+                            <div className="text-sm mt-1 font-bold text-right">
+                                <p>🛒 {t("basket")}: {post.basket?.items.length ?? 0}</p>
+                                <p>📦 {t("orders")}: {post.orders.length}</p>
+                            </div>
                         </div>
                     </span>
                     <span className="absolute inset-0 bg-gray-200 rounded-[8px] z-[-1] transform transition-all duration-150 ease-in-out group-hover:translate-x-0 group-hover:translate-y-0" />
