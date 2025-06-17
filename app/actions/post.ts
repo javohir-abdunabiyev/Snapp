@@ -14,6 +14,7 @@ export default async function createPost(formData: FormData) {
     const cookieStore: any = cookies();
     const email = cookieStore.get('email')?.value;
 
+
     if (!email) throw new Error('Email не найден в куках');
 
     const admin = await prisma.admin.findUnique({ where: { email } });

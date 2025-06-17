@@ -27,6 +27,7 @@
         "seeData": "To see the data",
         "ban": "Banned",
         "active": "Active",
-        "basket": "Basket"
+        "basket": "Basket",
+        "noPoststxt": "You don't have posts"
     }
 }
