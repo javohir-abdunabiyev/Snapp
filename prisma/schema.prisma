@@ -9,20 +9,20 @@ datasource db {
 }
 
 model User {
-  id          String   @id @default(uuid())
-  email       String   @unique
-  name        String
-  ban         Boolean  @default(false)
-  basket      Basket?
-  orders      Order[]
+  id     String  @id @default(uuid())
+  email  String  @unique
+  name   String
+  ban    Boolean @default(false)
+  basket Basket?
+  orders Order[]
 }
 
 model Admin {
-  id       String   @id @default(uuid())
-  email    String   @unique
+  id       String @id @default(uuid())
+  email    String @unique
   password String
   name     String
-  posts    Post[]   @relation("AdminPosts")
+  posts    Post[] @relation("AdminPosts")
 }
 
 model Post {
@@ -32,25 +32,26 @@ model Post {
   imageUrl  String
   price     Int
   published Boolean @default(true)
-  author    Admin   @relation("AdminPosts", fields: [authorId], references: [id])
   authorId  String
+  author    Admin   @relation("AdminPosts", fields: [authorId], references: [id])
 }
 
 model Basket {
-  id       String   @id @default(uuid())
-  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId   String   @unique
-  items    BasketItem[]
+  id     String       @id @default(uuid())
+  userId String       @unique
+  user   User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items  BasketItem[]
 }
 
 model BasketItem {
-  id        String  @id @default(uuid())
-  basket    Basket  @relation(fields: [basketId], references: [id], onDelete: Cascade)
-  basketId  String
-  title     String
-  imageUrl  String
-  price     Int
-  quantity  Int      @default(1)
+  id         String @id @default(uuid())
+  basketId   String
+  title      String
+  imageUrl   String
+  price      Int
+  quantity   Int    @default(1)
+  totalPrice Int    @default(0)
+  basket     Basket @relation(fields: [basketId], references: [id], onDelete: Cascade)
 }
 
 model Order {
@@ -59,15 +60,19 @@ model Order {
   userId    String
   items     OrderItem[]
   createdAt DateTime     @default(now())
+  status    String       @default("PENDING")
+  address   String
+  phone     String
+  total     Int          @default(0)
 }
 
+
 model OrderItem {
-  id        String       @id @default(uuid())
-  order     Order        @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  orderId   String
-  title     String
-  imageUrl  String
-  price     Int
-  quantity  Int
-  status    String       @default("PENDING")
+  id       String @id @default(uuid())
+  orderId  String
+  title    String
+  imageUrl String
+  price    Int
+  quantity Int
+  order    Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
 }
