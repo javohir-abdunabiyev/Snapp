@@ -1,6 +1,6 @@
-import { getServerSession } from "next-auth";
-import prisma from "@/lib/prisma";
-import { redirect } from "next/navigation";
+"use client";
+
+import { useEffect, useState } from "react";
 import QuantityController from "@/components/custom/QuantityCont";
 import {
     Dialog,
@@ -12,26 +12,41 @@ import {
 } from "@/components/ui/dialog";
 import { createOrder } from "../actions/order";
 import Form from "next/form";
+import { redirect } from "next/navigation";
 
-export default async function BasketPage() {
-    const session = await getServerSession();
+export default function BasketPage() {
+    const [items, setItems] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
 
-    if (!session?.user?.email) {
-        redirect("/");
-    }
+    useEffect(() => {
+        (async () => {
+            const sessionRes = await fetch("/api/auth/session");
+            const session = await sessionRes.json();
+            if (!session?.user?.email) {
+                redirect("/");
+            }
 
-    const user = await prisma.user.findUnique({
-        where: { email: session.user.email },
-        include: {
-            basket: {
-                include: {
-                    items: true,
-                },
-            },
-        },
-    });
+            const res = await fetch("/api/basket/items");
+            const data = await res.json();
+            setItems(data.items);
+            setLoading(false);
+        })();
+    }, []);
 
-    const items = user?.basket?.items || [];
+    const updateItemQuantity = (id: string, newQty: number) => {
+        setItems((prev) =>
+            prev.map((item) =>
+                item.id === id ? { ...item, quantity: newQty } : item
+            )
+        );
+    };
+
+    const totalPrice = items.reduce(
+        (acc, item) => acc + item.price * item.quantity,
+        0
+    );
+
+    if (loading) return <p className="text-white p-10">Загрузка...</p>;
 
     return (
         <div className="p-10 text-white">
@@ -41,28 +56,39 @@ export default async function BasketPage() {
             ) : (
                 <div className="grid grid-cols-[repeat(5,300px)] gap-6">
                     {items.map((item) => (
-                        <div key={item.id} className="relative max-w-[300px] rounded-[8px]">
-                            <span className="w-full h-full rounded-[6px] flex flex-col justify-between p-[20px] bg-black transform transition-all duration-150 ease-in-out hover:translate-x-[-0.3rem] hover:translate-y-[-0.3rem] text-white">
+                        <div
+                            key={item.id}
+                            className="relative max-w-[300px] rounded-[8px]"
+                        >
+                            <span className="w-full h-full rounded-[6px] flex flex-col justify-between p-[20px] bg-black text-white">
                                 <div className="max-w-[300px] border-b-[1px] border-y-gray-700">
                                     <img
                                         src={item.imageUrl}
                                         alt={item.title}
-                                        draggable="false"
                                         className="w-[300px] h-[200px] object-contain mb-[10px]"
                                     />
                                 </div>
                                 <div className="flex flex-col justify-between min-h-[140px]">
-                                    <h3 className="text-[20px] font-semibold mt-[5px] mb-[10px]">{item.title}</h3>
+                                    <h3 className="text-[20px] font-semibold mt-[5px] mb-[10px]">
+                                        {item.title}
+                                    </h3>
                                     <div className="flex items-center justify-between mt-[10px]">
-                                        <p>{item.price}$</p>
-                                        <QuantityController itemId={item.id} quantity={item.quantity} />
+                                        <p>{item.price * item.quantity}$</p>
+                                        <QuantityController
+                                            itemId={item.id}
+                                            quantity={item.quantity}
+                                            onQuantityChange={(newQty) =>
+                                                updateItemQuantity(item.id, newQty)
+                                            }
+                                        />
                                     </div>
                                 </div>
                             </span>
-                            <span className="absolute inset-0 bg-gray-200 rounded-[8px] z-[-1] transform transition-all duration-150 ease-in-out group-hover:translate-x-0 group-hover:translate-y-0" />
+                            <span className="absolute inset-0 bg-gray-200 rounded-[8px] z-[-1]" />
                         </div>
                     ))}
-                    {/* ORDER DIALOG */}
+
+                    {/* Order Button */}
                     <div className="fixed bottom-[40px] right-[20px]">
                         <Dialog>
                             <DialogTrigger asChild>
@@ -76,37 +102,29 @@ export default async function BasketPage() {
                                 <DialogHeader>
                                     <DialogTitle>Оформить заказ</DialogTitle>
                                     <DialogDescription>
-                                        Пожалуйста, введите адрес и номер телефона (начиная с +998).
+                                        Введите адрес и номер телефона (начиная с +998)
                                     </DialogDescription>
                                 </DialogHeader>
-
-                                {/* FORM */}
                                 <Form action={createOrder}>
-                                    <div className="mb-4">
-                                        <label htmlFor="address" className="block text-sm font-medium mb-1">Ваш адрес</label>
-                                        <input
-                                            type="text"
-                                            name="address"
-                                            id="address"
-                                            className="w-full p-2 rounded bg-[#1e1e1e] text-white border border-gray-500 focus:outline-none focus:border-white"
-                                            required
-                                        />
-                                    </div>
-                                    <div className="mb-4">
-                                        <label htmlFor="phone" className="block text-sm font-medium mb-1">Ваш номер телефона</label>
-                                        <input
-                                            type="text"
-                                            name="phone"
-                                            id="phone"
-                                            pattern="\+998\d{9}"
-                                            title="+998XXXXXXXXX"
-                                            className="w-full p-2 rounded bg-[#1e1e1e] text-white border border-gray-500 focus:outline-none focus:border-white"
-                                            required
-                                        />
-                                    </div>
+                                    <input
+                                        type="text"
+                                        name="address"
+                                        required
+                                        placeholder="Адрес"
+                                    />
+                                    <input
+                                        type="text"
+                                        name="phone"
+                                        required
+                                        placeholder="+998..."
+                                        pattern="\+998\d{9}"
+                                    />
+                                    <p className="text-lg font-bold mt-4">
+                                        Итого: {totalPrice}$
+                                    </p>
                                     <button
                                         type="submit"
-                                        className="rounded-[8px] p-[10px] flex items-center h-[40px] justify-center bg-[#ff90e8] text-black font-semibold w-full transform transition-all duration-150 ease-in-out hover:translate-x-[-0.3rem] hover:translate-y-[-0.3rem] hover:bg-orange-500"
+                                        className="mt-2 p-2 rounded bg-[#ff90e8] hover:bg-orange-500 text-black font-semibold"
                                     >
                                         Подтвердить заказ
                                     </button>

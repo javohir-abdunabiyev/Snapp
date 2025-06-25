@@ -44,15 +44,15 @@ model Basket {
 }
 
 model BasketItem {
-  id         String @id @default(uuid())
-  basketId   String
-  title      String
-  imageUrl   String
-  price      Int
-  quantity   Int    @default(1)
-  totalPrice Int    @default(0)
-  basket     Basket @relation(fields: [basketId], references: [id], onDelete: Cascade)
+  id       String  @id @default(uuid())
+  basketId String
+  title    String
+  imageUrl String
+  price    Int
+  quantity Int    @default(1)
+  basket   Basket @relation(fields: [basketId], references: [id], onDelete: Cascade)
 }
+
 
 model Order {
   id        String       @id @default(uuid())

@@ -15,8 +15,8 @@ export async function createOrder(formData: FormData) {
 
     const uzbekPhoneRegex = /^\+998\d{9}$/;
     if (!address || !phone || !uzbekPhoneRegex.test(phone)) {
-        alert('Пожалуйста, заполните все поля корректно.');
-        return;
+        // Эта проверка будет работать только в браузере, но здесь сервер. Лучше использовать redirect или throw error
+        redirect('/basket?error=invalid');
     }
 
     const user = await prisma.user.findUnique({
@@ -34,11 +34,16 @@ export async function createOrder(formData: FormData) {
         redirect('/basket?error=empty');
     }
 
+    const total = user.basket.items.reduce((acc, item) => {
+        return acc + item.price * item.quantity;
+    }, 0);
+
     await prisma.order.create({
         data: {
             userId: user.id,
             address,
             phone,
+            total,
             items: {
                 create: user.basket.items.map((item) => ({
                     title: item.title,

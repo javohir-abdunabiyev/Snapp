@@ -5857,13 +5857,11 @@ export namespace Prisma {
   export type BasketItemAvgAggregateOutputType = {
     price: number | null
     quantity: number | null
-    totalPrice: number | null
   }
 
   export type BasketItemSumAggregateOutputType = {
     price: number | null
     quantity: number | null
-    totalPrice: number | null
   }
 
   export type BasketItemMinAggregateOutputType = {
@@ -5873,7 +5871,6 @@ export namespace Prisma {
     imageUrl: string | null
     price: number | null
     quantity: number | null
-    totalPrice: number | null
   }
 
   export type BasketItemMaxAggregateOutputType = {
@@ -5883,7 +5880,6 @@ export namespace Prisma {
     imageUrl: string | null
     price: number | null
     quantity: number | null
-    totalPrice: number | null
   }
 
   export type BasketItemCountAggregateOutputType = {
@@ -5893,7 +5889,6 @@ export namespace Prisma {
     imageUrl: number
     price: number
     quantity: number
-    totalPrice: number
     _all: number
   }
 
@@ -5901,13 +5896,11 @@ export namespace Prisma {
   export type BasketItemAvgAggregateInputType = {
     price?: true
     quantity?: true
-    totalPrice?: true
   }
 
   export type BasketItemSumAggregateInputType = {
     price?: true
     quantity?: true
-    totalPrice?: true
   }
 
   export type BasketItemMinAggregateInputType = {
@@ -5917,7 +5910,6 @@ export namespace Prisma {
     imageUrl?: true
     price?: true
     quantity?: true
-    totalPrice?: true
   }
 
   export type BasketItemMaxAggregateInputType = {
@@ -5927,7 +5919,6 @@ export namespace Prisma {
     imageUrl?: true
     price?: true
     quantity?: true
-    totalPrice?: true
   }
 
   export type BasketItemCountAggregateInputType = {
@@ -5937,7 +5928,6 @@ export namespace Prisma {
     imageUrl?: true
     price?: true
     quantity?: true
-    totalPrice?: true
     _all?: true
   }
 
@@ -6034,7 +6024,6 @@ export namespace Prisma {
     imageUrl: string
     price: number
     quantity: number
-    totalPrice: number
     _count: BasketItemCountAggregateOutputType | null
     _avg: BasketItemAvgAggregateOutputType | null
     _sum: BasketItemSumAggregateOutputType | null
@@ -6063,7 +6052,6 @@ export namespace Prisma {
     imageUrl?: boolean
     price?: boolean
     quantity?: boolean
-    totalPrice?: boolean
     basket?: boolean | BasketDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["basketItem"]>
 
@@ -6074,7 +6062,6 @@ export namespace Prisma {
     imageUrl?: boolean
     price?: boolean
     quantity?: boolean
-    totalPrice?: boolean
     basket?: boolean | BasketDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["basketItem"]>
 
@@ -6085,7 +6072,6 @@ export namespace Prisma {
     imageUrl?: boolean
     price?: boolean
     quantity?: boolean
-    totalPrice?: boolean
     basket?: boolean | BasketDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["basketItem"]>
 
@@ -6096,10 +6082,9 @@ export namespace Prisma {
     imageUrl?: boolean
     price?: boolean
     quantity?: boolean
-    totalPrice?: boolean
   }
 
-  export type BasketItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "basketId" | "title" | "imageUrl" | "price" | "quantity" | "totalPrice", ExtArgs["result"]["basketItem"]>
+  export type BasketItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "basketId" | "title" | "imageUrl" | "price" | "quantity", ExtArgs["result"]["basketItem"]>
   export type BasketItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     basket?: boolean | BasketDefaultArgs<ExtArgs>
   }
@@ -6122,7 +6107,6 @@ export namespace Prisma {
       imageUrl: string
       price: number
       quantity: number
-      totalPrice: number
     }, ExtArgs["result"]["basketItem"]>
     composites: {}
   }
@@ -6553,7 +6537,6 @@ export namespace Prisma {
     readonly imageUrl: FieldRef<"BasketItem", 'String'>
     readonly price: FieldRef<"BasketItem", 'Int'>
     readonly quantity: FieldRef<"BasketItem", 'Int'>
-    readonly totalPrice: FieldRef<"BasketItem", 'Int'>
   }
     
 
@@ -9286,8 +9269,7 @@ export namespace Prisma {
     title: 'title',
     imageUrl: 'imageUrl',
     price: 'price',
-    quantity: 'quantity',
-    totalPrice: 'totalPrice'
+    quantity: 'quantity'
   };
 
   export type BasketItemScalarFieldEnum = (typeof BasketItemScalarFieldEnum)[keyof typeof BasketItemScalarFieldEnum]
@@ -9636,7 +9618,6 @@ export namespace Prisma {
     imageUrl?: StringFilter<"BasketItem"> | string
     price?: IntFilter<"BasketItem"> | number
     quantity?: IntFilter<"BasketItem"> | number
-    totalPrice?: IntFilter<"BasketItem"> | number
     basket?: XOR<BasketScalarRelationFilter, BasketWhereInput>
   }
 
@@ -9647,7 +9628,6 @@ export namespace Prisma {
     imageUrl?: SortOrder
     price?: SortOrder
     quantity?: SortOrder
-    totalPrice?: SortOrder
     basket?: BasketOrderByWithRelationInput
   }
 
@@ -9661,7 +9641,6 @@ export namespace Prisma {
     imageUrl?: StringFilter<"BasketItem"> | string
     price?: IntFilter<"BasketItem"> | number
     quantity?: IntFilter<"BasketItem"> | number
-    totalPrice?: IntFilter<"BasketItem"> | number
     basket?: XOR<BasketScalarRelationFilter, BasketWhereInput>
   }, "id">
 
@@ -9672,7 +9651,6 @@ export namespace Prisma {
     imageUrl?: SortOrder
     price?: SortOrder
     quantity?: SortOrder
-    totalPrice?: SortOrder
     _count?: BasketItemCountOrderByAggregateInput
     _avg?: BasketItemAvgOrderByAggregateInput
     _max?: BasketItemMaxOrderByAggregateInput
@@ -9690,7 +9668,6 @@ export namespace Prisma {
     imageUrl?: StringWithAggregatesFilter<"BasketItem"> | string
     price?: IntWithAggregatesFilter<"BasketItem"> | number
     quantity?: IntWithAggregatesFilter<"BasketItem"> | number
-    totalPrice?: IntWithAggregatesFilter<"BasketItem"> | number
   }
 
   export type OrderWhereInput = {
@@ -10048,7 +10025,6 @@ export namespace Prisma {
     imageUrl: string
     price: number
     quantity?: number
-    totalPrice?: number
     basket: BasketCreateNestedOneWithoutItemsInput
   }
 
@@ -10059,7 +10035,6 @@ export namespace Prisma {
     imageUrl: string
     price: number
     quantity?: number
-    totalPrice?: number
   }
 
   export type BasketItemUpdateInput = {
@@ -10068,7 +10043,6 @@ export namespace Prisma {
     imageUrl?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
-    totalPrice?: IntFieldUpdateOperationsInput | number
     basket?: BasketUpdateOneRequiredWithoutItemsNestedInput
   }
 
@@ -10079,7 +10053,6 @@ export namespace Prisma {
     imageUrl?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
-    totalPrice?: IntFieldUpdateOperationsInput | number
   }
 
   export type BasketItemCreateManyInput = {
@@ -10089,7 +10062,6 @@ export namespace Prisma {
     imageUrl: string
     price: number
     quantity?: number
-    totalPrice?: number
   }
 
   export type BasketItemUpdateManyMutationInput = {
@@ -10098,7 +10070,6 @@ export namespace Prisma {
     imageUrl?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
-    totalPrice?: IntFieldUpdateOperationsInput | number
   }
 
   export type BasketItemUncheckedUpdateManyInput = {
@@ -10108,7 +10079,6 @@ export namespace Prisma {
     imageUrl?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
-    totalPrice?: IntFieldUpdateOperationsInput | number
   }
 
   export type OrderCreateInput = {
@@ -10509,13 +10479,11 @@ export namespace Prisma {
     imageUrl?: SortOrder
     price?: SortOrder
     quantity?: SortOrder
-    totalPrice?: SortOrder
   }
 
   export type BasketItemAvgOrderByAggregateInput = {
     price?: SortOrder
     quantity?: SortOrder
-    totalPrice?: SortOrder
   }
 
   export type BasketItemMaxOrderByAggregateInput = {
@@ -10525,7 +10493,6 @@ export namespace Prisma {
     imageUrl?: SortOrder
     price?: SortOrder
     quantity?: SortOrder
-    totalPrice?: SortOrder
   }
 
   export type BasketItemMinOrderByAggregateInput = {
@@ -10535,13 +10502,11 @@ export namespace Prisma {
     imageUrl?: SortOrder
     price?: SortOrder
     quantity?: SortOrder
-    totalPrice?: SortOrder
   }
 
   export type BasketItemSumOrderByAggregateInput = {
     price?: SortOrder
     quantity?: SortOrder
-    totalPrice?: SortOrder
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -11325,7 +11290,6 @@ export namespace Prisma {
     imageUrl: string
     price: number
     quantity?: number
-    totalPrice?: number
   }
 
   export type BasketItemUncheckedCreateWithoutBasketInput = {
@@ -11334,7 +11298,6 @@ export namespace Prisma {
     imageUrl: string
     price: number
     quantity?: number
-    totalPrice?: number
   }
 
   export type BasketItemCreateOrConnectWithoutBasketInput = {
@@ -11400,7 +11363,6 @@ export namespace Prisma {
     imageUrl?: StringFilter<"BasketItem"> | string
     price?: IntFilter<"BasketItem"> | number
     quantity?: IntFilter<"BasketItem"> | number
-    totalPrice?: IntFilter<"BasketItem"> | number
   }
 
   export type BasketCreateWithoutItemsInput = {
@@ -11677,7 +11639,6 @@ export namespace Prisma {
     imageUrl: string
     price: number
     quantity?: number
-    totalPrice?: number
   }
 
   export type BasketItemUpdateWithoutBasketInput = {
@@ -11686,7 +11647,6 @@ export namespace Prisma {
     imageUrl?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
-    totalPrice?: IntFieldUpdateOperationsInput | number
   }
 
   export type BasketItemUncheckedUpdateWithoutBasketInput = {
@@ -11695,7 +11655,6 @@ export namespace Prisma {
     imageUrl?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
-    totalPrice?: IntFieldUpdateOperationsInput | number
   }
 
   export type BasketItemUncheckedUpdateManyWithoutBasketInput = {
@@ -11704,7 +11663,6 @@ export namespace Prisma {
     imageUrl?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
-    totalPrice?: IntFieldUpdateOperationsInput | number
   }
 
   export type OrderItemCreateManyOrderInput = {

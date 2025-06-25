@@ -28,7 +28,7 @@ export default async function Home() {
                   <span className="absolute inset-0 bg-gray-200 rounded-[8px] z-[-1] transform  transition-all duration-150 ease-in-out group-hover:translate-x-0 group-hover:translate-y-0" />
                 </button>
               </a>
-              <a href="#">
+              <a href="/orders">
                 <button className="relative flex items-center justify-center w-[40px] h-[40px] rounded-[8px] cursor-pointer">
                   <span className="w-full h-full rounded-[6px] flex items-center justify-center bg-[#242423] hover:bg-black transform transition-all duration-150 ease-in-out hover:translate-x-[-0.3rem] hover:translate-y-[-0.3rem]">
                     <MdHistory size={25} color="grey" />

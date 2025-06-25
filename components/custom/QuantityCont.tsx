@@ -5,9 +5,11 @@ import { useState } from "react";
 export default function QuantityController({
     itemId,
     quantity: initialQty,
+    onQuantityChange,
 }: {
     itemId: string;
     quantity: number;
+    onQuantityChange: (newQty: number) => void;
 }) {
     const [quantity, setQuantity] = useState(initialQty);
 
@@ -17,7 +19,10 @@ export default function QuantityController({
             body: JSON.stringify({ itemId, quantity: newQty }),
         });
 
-        if (res.ok) setQuantity(newQty);
+        if (res.ok) {
+            setQuantity(newQty);
+            onQuantityChange(newQty);
+        }
     };
 
     return (

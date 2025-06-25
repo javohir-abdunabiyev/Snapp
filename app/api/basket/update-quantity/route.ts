@@ -1,24 +1,17 @@
-import { getServerSession } from "next-auth";
+import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { NextResponse } from "next/server";
 
-export async function POST(req: Request) {
-    const session = await getServerSession();
-
-    if (!session?.user?.email) {
-        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
+export async function POST(req: NextRequest) {
     const { itemId, quantity } = await req.json();
 
-    if (quantity < 1 || quantity > 10) {
-        return NextResponse.json({ error: "Invalid quantity" }, { status: 400 });
+    if (!itemId || typeof quantity !== "number") {
+        return NextResponse.json({ error: "Неверные данные" }, { status: 400 });
     }
 
-    const updated = await prisma.basketItem.update({
+    const item = await prisma.basketItem.update({
         where: { id: itemId },
         data: { quantity },
     });
 
-    return NextResponse.json({ success: true, item: updated });
+    return NextResponse.json({ success: true, item });
 }
