@@ -3,9 +3,11 @@
 import { useEffect, useState } from "react";
 import { SlBasket } from "react-icons/sl";
 import { FaCheckCircle } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 export default function PostCard({ post, isAuth }: { post: any; isAuth: boolean }) {
     const [inBasket, setInBasket] = useState(false);
+    const router = useRouter();
 
     useEffect(() => {
         const checkBasket = async () => {
@@ -18,16 +20,29 @@ export default function PostCard({ post, isAuth }: { post: any; isAuth: boolean 
         if (isAuth) checkBasket();
     }, [isAuth, post.title]);
 
-    const addToBasket = async () => {
+    const addToBasket = async (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        e.nativeEvent.stopImmediatePropagation?.(); // 🔥 важная строка
+
         await fetch("/api/basket/add", {
             method: "POST",
             body: JSON.stringify({ postId: post.id }),
         });
+
         setInBasket(true);
     };
 
+
+    const handleCardClick = () => {
+        router.push(`/product/${post.id}`);
+    };
+
     return (
-        <div className="relative max-w-[400px] rounded-[8px]">
+        <div
+            onClick={handleCardClick}
+            className="relative max-w-[400px] rounded-[8px] text-left w-full cursor-pointer"
+        >
             <span className="w-full h-full rounded-[6px] flex flex-col justify-between p-[20px] bg-black transform transition-all duration-150 ease-in-out hover:translate-x-[-0.3rem] hover:translate-y-[-0.3rem] text-white">
                 <div className="border-b-[1px] border-y-gray-700">
                     <img
@@ -46,7 +61,7 @@ export default function PostCard({ post, isAuth }: { post: any; isAuth: boolean 
                         <p>{post.price}$</p>
                         {isAuth ? (
                             inBasket ? (
-                                <FaCheckCircle size={20} color="green" />
+                                <FaCheckCircle size={40} color="#ff90e8" />
                             ) : (
                                 <button
                                     onClick={addToBasket}
@@ -59,7 +74,7 @@ export default function PostCard({ post, isAuth }: { post: any; isAuth: boolean 
                     </div>
                 </div>
             </span>
-            <span className="absolute inset-0 bg-gray-200 rounded-[8px] z-[-1] transform transition-all duration-150 ease-in-out group-hover:translate-x-0 group-hover:translate-y-0" />
+            <span className="absolute inset-0 bg-gray-200 rounded-[8px] z-[-1]" />
         </div>
     );
 }

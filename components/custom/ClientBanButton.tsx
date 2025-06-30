@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 import { useState, useTransition } from "react";
 
 export default function ClientBanButton({
@@ -23,6 +24,8 @@ export default function ClientBanButton({
         }
     };
 
+    const t = useTranslations("adminUsers")
+
     return (
         <Button
             onClick={() => startTransition(handleBanUser)}
@@ -33,7 +36,7 @@ export default function ClientBanButton({
                     : "bg-green-500 hover:bg-green-600 cursor-pointer"
             }
         >
-            <span className="text-white">{banStatus ? "Banned" : "Active"}</span>
+            <span className="text-white">{banStatus ? <span>{t("banned")}</span> : `${t("active")}`}</span>
         </Button>
     );
 }

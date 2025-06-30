@@ -2,10 +2,13 @@
 
 import { EditDialog } from "@/components/custom/editDialog";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
+import { use, useEffect, useState } from "react";
 
 export default function AddPost() {
     const [posts, setPosts] = useState<any[]>([]);
+
+    const t = useTranslations("adminPosts");
 
     useEffect(() => {
         fetch("/api/posts")
@@ -33,7 +36,7 @@ export default function AddPost() {
             <div className="flex justify-center bg-black mt-[30px] pb-[20px]">
                 <div className="flex flex-col text-center mt-[30px]">
                     <img src="/images/postpagebg.svg" alt="" draggable="false" className="w-[525px] h-[525px]" />
-                    <p className="text-white text-[20px] font-semibold mt-[10px]">No posts found</p>
+                    <p className="text-white text-[20px] font-semibold mt-[10px]">{t("noPosts")}</p>
                 </div>
             </div>
         );
@@ -73,7 +76,7 @@ export default function AddPost() {
                                         className="cursor-pointer bg-red-500 hover:bg-red-600"
                                         onClick={() => handleDelete(post.id)}
                                     >
-                                        Delete
+                                        {t("delete")}
                                     </Button>
                                 </div>
                             </div>

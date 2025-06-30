@@ -5,6 +5,7 @@ import { UploadDropzone } from "@/app/utils/uploadthing";
 import Image from "next/image";
 import Form from "next/form";
 import createPost from "@/app/actions/post";
+import { useTranslations } from "next-intl";
 
 
 export default function AddPost() {
@@ -12,13 +13,13 @@ export default function AddPost() {
     const [content, setContent] = useState("");
     const [price, setPrice] = useState("");
     const [imageUrl, setImageUrl] = useState("");
-
+    const t = useTranslations("adminAddPost");
     const formRef = useRef<HTMLFormElement>(null);
 
     const handleCreateClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         if (!imageUrl) {
-            alert("❗ Загрузите изображение перед отправкой.");
+            alert(`${t("uploadTheImage")}`);
             return;
         }
         formRef.current?.requestSubmit();
@@ -29,19 +30,19 @@ export default function AddPost() {
     return (
         <div className="max-w-xl mx-auto p-6 space-y-4">
 
-            <h2 className="text-2xl font-semibold text-white">Add a new post</h2>
+            <h2 className="text-2xl font-semibold text-white">{t("addNewPost")}</h2>
 
             <UploadDropzone
                 appearance={{
                     container: {
-                        height: "200px"
+                        height: "300px"
                     }
                 }}
                 endpoint="imageUploader"
                 onClientUploadComplete={(res) => {
                     if (res && res[0]?.url) {
                         setImageUrl(res[0].url);
-                        alert("✅ Изображение загружено");
+                        alert(`${t("imageUploaded")}`);
                     }
                 }}
                 onUploadError={(err) => alert(`Ошибка загрузки: ${err.message}`)}
@@ -52,7 +53,7 @@ export default function AddPost() {
                 action={createPost}
                 className="space-y-4"
             >
-                <h3 className="text-[20px] font-semibold text-white">Post title</h3>
+                <h3 className="text-[20px] font-semibold text-white">{t("postTitle")}</h3>
                 <input
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
@@ -61,7 +62,7 @@ export default function AddPost() {
                     className="text-white placeholder:text-gray-500 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black transition"
                     name="title"
                 />
-                <h3 className="text-[20px] font-semibold text-white">Post content</h3>
+                <h3 className="text-[20px] font-semibold text-white">{t("postContent")}</h3>
                 <textarea
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
@@ -69,7 +70,7 @@ export default function AddPost() {
                     className="text-white placeholder:text-gray-500 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black transition min-h-[120px]"
                     name="content"
                 />
-                <h3 className="text-[20px] font-semibold text-white">Post price in $ (dollar)</h3>
+                <h3 className="text-[20px] font-semibold text-white">{t("postPrice")}</h3>
                 <input
                     type="number"
                     value={price}
@@ -89,7 +90,7 @@ export default function AddPost() {
                     className="relative flex items-center rounded-[8px] justify-center w-full h-[40px] cursor-pointer hover:bg-[#ff90e8]"
                 >
                     <span className="rounded-[8px] flex items-center h-[40px] justify-center bg-black text-white !w-full transform transition-all duration-150 ease-in-out hover:translate-x-[-0.3rem] hover:translate-y-[-0.3rem]">
-                        Create a post
+                        {t("addPost")}
                     </span>
                 </button>
             </Form>

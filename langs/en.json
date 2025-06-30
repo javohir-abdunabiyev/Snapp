@@ -1,10 +1,15 @@
 {
     "header": {
         "home": "Home",
-        "about": "About"
+        "support": "Support"
     },
     "catalog": {
-        "catalogTXT": "Catalog"
+        "catalogTXT": "Catalog",
+        "deletefrombasket": "Delete from basket",
+        "addtobasket": "Add to basket",
+        "backtoproducts": "Back to products",
+        "nodescription": "No description",
+        "registerprompt": "To add a product to the basket, you need to register"
     },
     "placeholder": {
         "search": "Search"
@@ -29,5 +34,68 @@
         "active": "Active",
         "basket": "Basket",
         "noPoststxt": "You don't have posts"
+    },
+    "basket": {
+        "title": "Your basket",
+        "empty": "Your basket is empty",
+        "back": "Back to products",
+        "Banned": "You are banned",
+        "total": "Total",
+        "checkout": "Place an order",
+        "remove": "Remove",
+        "confirm": "Confirm",
+        "deliveryNote": "We deliver only in Samarkand",
+        "checkoutTitle": "Place an order",
+        "checkoutDescription": "Enter the exact address and phone number (starting with +998, without spaces and '-'), otherwise you will be blocked.",
+        "address": "Address"
+    },
+    "orders": {
+        "title": "Your orders",
+        "back": "Back to products",
+        "empty": "You have no orders",
+        "orderFrom": "Order from",
+        "deliveryNote": "Delivery within 10 days.",
+        "address": "Address",
+        "phone": "Phone",
+        "price": "Price",
+        "quantity": "Quantity",
+        "total": "Total",
+        "totalAmount": "Total order amount",
+        "orderStatus": "Order Status"
+    },
+    "adminUsers": {
+        "basket": "Basket",
+        "orders": "Orders",
+        "banned": "Banned",
+        "active": "Active"
+    },
+    "adminOrders": {
+        "dontHaveOrders": "You don't have orders",
+        "allOrders": "All orders",
+        "orderFrom": "Order from",
+        "user": "User",
+        "address": "Address",
+        "phone": "Phone",
+        "price": "Price",
+        "quantity": "Quantity",
+        "total": "Total",
+        "Orderamount": "Order amount"
+    },
+    "adminPosts": {
+        "noPosts": "You don't have posts",
+        "delete": "Delete",
+        "edit": "Edit",
+        "editPost": "Edit Post",
+        "saving": "Saving...",
+        "saveChanges": "Save Changes"
+    },
+    "adminAddPost": {
+        "addNewPost": "Add a new post",
+        "imageUploaded": "Image uploaded",
+        "uploadTheImage": "Upload the image",
+        "postTitle": "Post title",
+        "postContent": "Post content",
+        "postPrice": "Post price in $ (dollars)",
+        "addPost": "Add Post"
     }
 }

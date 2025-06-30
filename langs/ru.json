@@ -1,10 +1,15 @@
 {
     "header": {
         "home": "Главная",
-        "about": "О нас"
+        "support": "Поддержка"
     },
     "catalog": {
-        "catalogTXT": "Каталог"
+        "catalogTXT": "Каталог",
+        "deletefrombasket": "Удалить из корзины",
+        "addtobasket": "Добавить в корзину",
+        "backtoproducts": "Назад к товарам",
+        "nodescription": "Нет описания",
+        "registerprompt": "Чтобы добавить товар в корзину, вам нужно зарегистрироваться"
     },
     "placeholder": {
         "search": "Поиск"
@@ -29,5 +34,68 @@
         "active": "Активный",
         "basket": "Корзина",
         "noPoststxt": "У вас нет постов"
+    },
+    "basket": {
+        "title": "Ваша корзина",
+        "empty": "Ваша корзина пуста",
+        "back": "Назад к товарам",
+        "Banned": "Вы заблокированы",
+        "total": "Итого",
+        "checkout": "Оформить заказ",
+        "remove": "Удалить",
+        "confirm": "Подтвердить",
+        "deliveryNote": "Мы доставляем только в Самарканде",
+        "checkoutTitle": "Оформить заказ",
+        "checkoutDescription": "Введите точный адрес и номер телефона (начиная с +998, без пробелов и '-'), иначе вы будете заблокированы.",
+        "address": "Адрес"
+    },
+    "orders": {
+        "title": "Ваши заказы",
+        "back": "Назад к товарам",
+        "empty": "У вас нет заказов",
+        "orderFrom": "Заказ от",
+        "deliveryNote": "Доставят в течении 10 дней.",
+        "address": "Адрес",
+        "phone": "Телефон",
+        "price": "Цена",
+        "quantity": "Количество",
+        "total": "Итого",
+        "totalAmount": "Общая сумма заказа",
+        "orderStatus": "Статус заказа"
+    },
+    "adminUsers": {
+        "basket": "Корзина",
+        "orders": "Заказы",
+        "banned": "Блокирован",
+        "active": "Активен"
+    },
+    "adminOrders": {
+        "dontHaveOrders": "У вас нет заказов",
+        "allOrders": "Все заказы",
+        "orderFrom": "Заказ от",
+        "user": "Пользователь",
+        "address": "Адрес",
+        "phone": "Телефон",
+        "price": "Цена",
+        "quantity": "Кол-во",
+        "total": "Итого",
+        "Orderamount": "Сумма заказа"
+    },
+    "adminPosts": {
+        "noPosts": "У вас нет постов",
+        "delete": "Удалить",
+        "edit": "Изменить",
+        "editPost": "Изменить пост",
+        "saving": "Сохранение...",
+        "saveChanges": "Сохранить изменения"
+    },
+    "adminAddPost": {
+        "addNewPost": "Добавить новый пост",
+        "imageUploaded": "Изображение загружено",
+        "uploadTheImage": "Загрузите изображение",
+        "postTitle": "Название поста",
+        "postContent": "Содержание поста",
+        "postPrice": "Цена поста в $ (долларах)",
+        "addPost": "Добавить пост"
     }
 }

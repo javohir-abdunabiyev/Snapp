@@ -1473,6 +1473,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type PostCountOutputType
+   */
+
+  export type PostCountOutputType = {
+    basketItems: number
+  }
+
+  export type PostCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    basketItems?: boolean | PostCountOutputTypeCountBasketItemsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PostCountOutputType without action
+   */
+  export type PostCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostCountOutputType
+     */
+    select?: PostCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PostCountOutputType without action
+   */
+  export type PostCountOutputTypeCountBasketItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BasketItemWhereInput
+  }
+
+
+  /**
    * Count Type BasketCountOutputType
    */
 
@@ -3890,6 +3921,8 @@ export namespace Prisma {
     published?: boolean
     authorId?: boolean
     author?: boolean | AdminDefaultArgs<ExtArgs>
+    basketItems?: boolean | Post$basketItemsArgs<ExtArgs>
+    _count?: boolean | PostCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["post"]>
 
   export type PostSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3927,6 +3960,8 @@ export namespace Prisma {
   export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "imageUrl" | "price" | "published" | "authorId", ExtArgs["result"]["post"]>
   export type PostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | AdminDefaultArgs<ExtArgs>
+    basketItems?: boolean | Post$basketItemsArgs<ExtArgs>
+    _count?: boolean | PostCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PostIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | AdminDefaultArgs<ExtArgs>
@@ -3939,6 +3974,7 @@ export namespace Prisma {
     name: "Post"
     objects: {
       author: Prisma.$AdminPayload<ExtArgs>
+      basketItems: Prisma.$BasketItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4343,6 +4379,7 @@ export namespace Prisma {
   export interface Prisma__PostClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     author<T extends AdminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdminDefaultArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    basketItems<T extends Post$basketItemsArgs<ExtArgs> = {}>(args?: Subset<T, Post$basketItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BasketItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4772,6 +4809,30 @@ export namespace Prisma {
      * Limit how many Posts to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Post.basketItems
+   */
+  export type Post$basketItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BasketItem
+     */
+    select?: BasketItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BasketItem
+     */
+    omit?: BasketItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BasketItemInclude<ExtArgs> | null
+    where?: BasketItemWhereInput
+    orderBy?: BasketItemOrderByWithRelationInput | BasketItemOrderByWithRelationInput[]
+    cursor?: BasketItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BasketItemScalarFieldEnum | BasketItemScalarFieldEnum[]
   }
 
   /**
@@ -5867,6 +5928,7 @@ export namespace Prisma {
   export type BasketItemMinAggregateOutputType = {
     id: string | null
     basketId: string | null
+    postId: string | null
     title: string | null
     imageUrl: string | null
     price: number | null
@@ -5876,6 +5938,7 @@ export namespace Prisma {
   export type BasketItemMaxAggregateOutputType = {
     id: string | null
     basketId: string | null
+    postId: string | null
     title: string | null
     imageUrl: string | null
     price: number | null
@@ -5885,6 +5948,7 @@ export namespace Prisma {
   export type BasketItemCountAggregateOutputType = {
     id: number
     basketId: number
+    postId: number
     title: number
     imageUrl: number
     price: number
@@ -5906,6 +5970,7 @@ export namespace Prisma {
   export type BasketItemMinAggregateInputType = {
     id?: true
     basketId?: true
+    postId?: true
     title?: true
     imageUrl?: true
     price?: true
@@ -5915,6 +5980,7 @@ export namespace Prisma {
   export type BasketItemMaxAggregateInputType = {
     id?: true
     basketId?: true
+    postId?: true
     title?: true
     imageUrl?: true
     price?: true
@@ -5924,6 +5990,7 @@ export namespace Prisma {
   export type BasketItemCountAggregateInputType = {
     id?: true
     basketId?: true
+    postId?: true
     title?: true
     imageUrl?: true
     price?: true
@@ -6020,6 +6087,7 @@ export namespace Prisma {
   export type BasketItemGroupByOutputType = {
     id: string
     basketId: string
+    postId: string
     title: string
     imageUrl: string
     price: number
@@ -6048,61 +6116,73 @@ export namespace Prisma {
   export type BasketItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     basketId?: boolean
+    postId?: boolean
     title?: boolean
     imageUrl?: boolean
     price?: boolean
     quantity?: boolean
     basket?: boolean | BasketDefaultArgs<ExtArgs>
+    post?: boolean | PostDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["basketItem"]>
 
   export type BasketItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     basketId?: boolean
+    postId?: boolean
     title?: boolean
     imageUrl?: boolean
     price?: boolean
     quantity?: boolean
     basket?: boolean | BasketDefaultArgs<ExtArgs>
+    post?: boolean | PostDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["basketItem"]>
 
   export type BasketItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     basketId?: boolean
+    postId?: boolean
     title?: boolean
     imageUrl?: boolean
     price?: boolean
     quantity?: boolean
     basket?: boolean | BasketDefaultArgs<ExtArgs>
+    post?: boolean | PostDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["basketItem"]>
 
   export type BasketItemSelectScalar = {
     id?: boolean
     basketId?: boolean
+    postId?: boolean
     title?: boolean
     imageUrl?: boolean
     price?: boolean
     quantity?: boolean
   }
 
-  export type BasketItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "basketId" | "title" | "imageUrl" | "price" | "quantity", ExtArgs["result"]["basketItem"]>
+  export type BasketItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "basketId" | "postId" | "title" | "imageUrl" | "price" | "quantity", ExtArgs["result"]["basketItem"]>
   export type BasketItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     basket?: boolean | BasketDefaultArgs<ExtArgs>
+    post?: boolean | PostDefaultArgs<ExtArgs>
   }
   export type BasketItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     basket?: boolean | BasketDefaultArgs<ExtArgs>
+    post?: boolean | PostDefaultArgs<ExtArgs>
   }
   export type BasketItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     basket?: boolean | BasketDefaultArgs<ExtArgs>
+    post?: boolean | PostDefaultArgs<ExtArgs>
   }
 
   export type $BasketItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "BasketItem"
     objects: {
       basket: Prisma.$BasketPayload<ExtArgs>
+      post: Prisma.$PostPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       basketId: string
+      postId: string
       title: string
       imageUrl: string
       price: number
@@ -6502,6 +6582,7 @@ export namespace Prisma {
   export interface Prisma__BasketItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     basket<T extends BasketDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BasketDefaultArgs<ExtArgs>>): Prisma__BasketClient<$Result.GetResult<Prisma.$BasketPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    post<T extends PostDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PostDefaultArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6533,6 +6614,7 @@ export namespace Prisma {
   interface BasketItemFieldRefs {
     readonly id: FieldRef<"BasketItem", 'String'>
     readonly basketId: FieldRef<"BasketItem", 'String'>
+    readonly postId: FieldRef<"BasketItem", 'String'>
     readonly title: FieldRef<"BasketItem", 'String'>
     readonly imageUrl: FieldRef<"BasketItem", 'String'>
     readonly price: FieldRef<"BasketItem", 'Int'>
@@ -9266,6 +9348,7 @@ export namespace Prisma {
   export const BasketItemScalarFieldEnum: {
     id: 'id',
     basketId: 'basketId',
+    postId: 'postId',
     title: 'title',
     imageUrl: 'imageUrl',
     price: 'price',
@@ -9510,6 +9593,7 @@ export namespace Prisma {
     published?: BoolFilter<"Post"> | boolean
     authorId?: StringFilter<"Post"> | string
     author?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+    basketItems?: BasketItemListRelationFilter
   }
 
   export type PostOrderByWithRelationInput = {
@@ -9521,6 +9605,7 @@ export namespace Prisma {
     published?: SortOrder
     authorId?: SortOrder
     author?: AdminOrderByWithRelationInput
+    basketItems?: BasketItemOrderByRelationAggregateInput
   }
 
   export type PostWhereUniqueInput = Prisma.AtLeast<{
@@ -9535,6 +9620,7 @@ export namespace Prisma {
     published?: BoolFilter<"Post"> | boolean
     authorId?: StringFilter<"Post"> | string
     author?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+    basketItems?: BasketItemListRelationFilter
   }, "id">
 
   export type PostOrderByWithAggregationInput = {
@@ -9614,21 +9700,25 @@ export namespace Prisma {
     NOT?: BasketItemWhereInput | BasketItemWhereInput[]
     id?: StringFilter<"BasketItem"> | string
     basketId?: StringFilter<"BasketItem"> | string
+    postId?: StringFilter<"BasketItem"> | string
     title?: StringFilter<"BasketItem"> | string
     imageUrl?: StringFilter<"BasketItem"> | string
     price?: IntFilter<"BasketItem"> | number
     quantity?: IntFilter<"BasketItem"> | number
     basket?: XOR<BasketScalarRelationFilter, BasketWhereInput>
+    post?: XOR<PostScalarRelationFilter, PostWhereInput>
   }
 
   export type BasketItemOrderByWithRelationInput = {
     id?: SortOrder
     basketId?: SortOrder
+    postId?: SortOrder
     title?: SortOrder
     imageUrl?: SortOrder
     price?: SortOrder
     quantity?: SortOrder
     basket?: BasketOrderByWithRelationInput
+    post?: PostOrderByWithRelationInput
   }
 
   export type BasketItemWhereUniqueInput = Prisma.AtLeast<{
@@ -9637,16 +9727,19 @@ export namespace Prisma {
     OR?: BasketItemWhereInput[]
     NOT?: BasketItemWhereInput | BasketItemWhereInput[]
     basketId?: StringFilter<"BasketItem"> | string
+    postId?: StringFilter<"BasketItem"> | string
     title?: StringFilter<"BasketItem"> | string
     imageUrl?: StringFilter<"BasketItem"> | string
     price?: IntFilter<"BasketItem"> | number
     quantity?: IntFilter<"BasketItem"> | number
     basket?: XOR<BasketScalarRelationFilter, BasketWhereInput>
+    post?: XOR<PostScalarRelationFilter, PostWhereInput>
   }, "id">
 
   export type BasketItemOrderByWithAggregationInput = {
     id?: SortOrder
     basketId?: SortOrder
+    postId?: SortOrder
     title?: SortOrder
     imageUrl?: SortOrder
     price?: SortOrder
@@ -9664,6 +9757,7 @@ export namespace Prisma {
     NOT?: BasketItemScalarWhereWithAggregatesInput | BasketItemScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"BasketItem"> | string
     basketId?: StringWithAggregatesFilter<"BasketItem"> | string
+    postId?: StringWithAggregatesFilter<"BasketItem"> | string
     title?: StringWithAggregatesFilter<"BasketItem"> | string
     imageUrl?: StringWithAggregatesFilter<"BasketItem"> | string
     price?: IntWithAggregatesFilter<"BasketItem"> | number
@@ -9920,6 +10014,7 @@ export namespace Prisma {
     price: number
     published?: boolean
     author: AdminCreateNestedOneWithoutPostsInput
+    basketItems?: BasketItemCreateNestedManyWithoutPostInput
   }
 
   export type PostUncheckedCreateInput = {
@@ -9930,6 +10025,7 @@ export namespace Prisma {
     price: number
     published?: boolean
     authorId: string
+    basketItems?: BasketItemUncheckedCreateNestedManyWithoutPostInput
   }
 
   export type PostUpdateInput = {
@@ -9940,6 +10036,7 @@ export namespace Prisma {
     price?: IntFieldUpdateOperationsInput | number
     published?: BoolFieldUpdateOperationsInput | boolean
     author?: AdminUpdateOneRequiredWithoutPostsNestedInput
+    basketItems?: BasketItemUpdateManyWithoutPostNestedInput
   }
 
   export type PostUncheckedUpdateInput = {
@@ -9950,6 +10047,7 @@ export namespace Prisma {
     price?: IntFieldUpdateOperationsInput | number
     published?: BoolFieldUpdateOperationsInput | boolean
     authorId?: StringFieldUpdateOperationsInput | string
+    basketItems?: BasketItemUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type PostCreateManyInput = {
@@ -10026,11 +10124,13 @@ export namespace Prisma {
     price: number
     quantity?: number
     basket: BasketCreateNestedOneWithoutItemsInput
+    post: PostCreateNestedOneWithoutBasketItemsInput
   }
 
   export type BasketItemUncheckedCreateInput = {
     id?: string
     basketId: string
+    postId: string
     title: string
     imageUrl: string
     price: number
@@ -10044,11 +10144,13 @@ export namespace Prisma {
     price?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
     basket?: BasketUpdateOneRequiredWithoutItemsNestedInput
+    post?: PostUpdateOneRequiredWithoutBasketItemsNestedInput
   }
 
   export type BasketItemUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     basketId?: StringFieldUpdateOperationsInput | string
+    postId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
@@ -10058,6 +10160,7 @@ export namespace Prisma {
   export type BasketItemCreateManyInput = {
     id?: string
     basketId: string
+    postId: string
     title: string
     imageUrl: string
     price: number
@@ -10075,6 +10178,7 @@ export namespace Prisma {
   export type BasketItemUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     basketId?: StringFieldUpdateOperationsInput | string
+    postId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
@@ -10360,9 +10464,19 @@ export namespace Prisma {
     isNot?: AdminWhereInput
   }
 
+  export type BasketItemListRelationFilter = {
+    every?: BasketItemWhereInput
+    some?: BasketItemWhereInput
+    none?: BasketItemWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type BasketItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type PostCountOrderByAggregateInput = {
@@ -10442,16 +10556,6 @@ export namespace Prisma {
     isNot?: UserWhereInput
   }
 
-  export type BasketItemListRelationFilter = {
-    every?: BasketItemWhereInput
-    some?: BasketItemWhereInput
-    none?: BasketItemWhereInput
-  }
-
-  export type BasketItemOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type BasketCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
@@ -10472,9 +10576,15 @@ export namespace Prisma {
     isNot?: BasketWhereInput
   }
 
+  export type PostScalarRelationFilter = {
+    is?: PostWhereInput
+    isNot?: PostWhereInput
+  }
+
   export type BasketItemCountOrderByAggregateInput = {
     id?: SortOrder
     basketId?: SortOrder
+    postId?: SortOrder
     title?: SortOrder
     imageUrl?: SortOrder
     price?: SortOrder
@@ -10489,6 +10599,7 @@ export namespace Prisma {
   export type BasketItemMaxOrderByAggregateInput = {
     id?: SortOrder
     basketId?: SortOrder
+    postId?: SortOrder
     title?: SortOrder
     imageUrl?: SortOrder
     price?: SortOrder
@@ -10498,6 +10609,7 @@ export namespace Prisma {
   export type BasketItemMinOrderByAggregateInput = {
     id?: SortOrder
     basketId?: SortOrder
+    postId?: SortOrder
     title?: SortOrder
     imageUrl?: SortOrder
     price?: SortOrder
@@ -10754,6 +10866,20 @@ export namespace Prisma {
     connect?: AdminWhereUniqueInput
   }
 
+  export type BasketItemCreateNestedManyWithoutPostInput = {
+    create?: XOR<BasketItemCreateWithoutPostInput, BasketItemUncheckedCreateWithoutPostInput> | BasketItemCreateWithoutPostInput[] | BasketItemUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: BasketItemCreateOrConnectWithoutPostInput | BasketItemCreateOrConnectWithoutPostInput[]
+    createMany?: BasketItemCreateManyPostInputEnvelope
+    connect?: BasketItemWhereUniqueInput | BasketItemWhereUniqueInput[]
+  }
+
+  export type BasketItemUncheckedCreateNestedManyWithoutPostInput = {
+    create?: XOR<BasketItemCreateWithoutPostInput, BasketItemUncheckedCreateWithoutPostInput> | BasketItemCreateWithoutPostInput[] | BasketItemUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: BasketItemCreateOrConnectWithoutPostInput | BasketItemCreateOrConnectWithoutPostInput[]
+    createMany?: BasketItemCreateManyPostInputEnvelope
+    connect?: BasketItemWhereUniqueInput | BasketItemWhereUniqueInput[]
+  }
+
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
   }
@@ -10772,6 +10898,34 @@ export namespace Prisma {
     upsert?: AdminUpsertWithoutPostsInput
     connect?: AdminWhereUniqueInput
     update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutPostsInput, AdminUpdateWithoutPostsInput>, AdminUncheckedUpdateWithoutPostsInput>
+  }
+
+  export type BasketItemUpdateManyWithoutPostNestedInput = {
+    create?: XOR<BasketItemCreateWithoutPostInput, BasketItemUncheckedCreateWithoutPostInput> | BasketItemCreateWithoutPostInput[] | BasketItemUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: BasketItemCreateOrConnectWithoutPostInput | BasketItemCreateOrConnectWithoutPostInput[]
+    upsert?: BasketItemUpsertWithWhereUniqueWithoutPostInput | BasketItemUpsertWithWhereUniqueWithoutPostInput[]
+    createMany?: BasketItemCreateManyPostInputEnvelope
+    set?: BasketItemWhereUniqueInput | BasketItemWhereUniqueInput[]
+    disconnect?: BasketItemWhereUniqueInput | BasketItemWhereUniqueInput[]
+    delete?: BasketItemWhereUniqueInput | BasketItemWhereUniqueInput[]
+    connect?: BasketItemWhereUniqueInput | BasketItemWhereUniqueInput[]
+    update?: BasketItemUpdateWithWhereUniqueWithoutPostInput | BasketItemUpdateWithWhereUniqueWithoutPostInput[]
+    updateMany?: BasketItemUpdateManyWithWhereWithoutPostInput | BasketItemUpdateManyWithWhereWithoutPostInput[]
+    deleteMany?: BasketItemScalarWhereInput | BasketItemScalarWhereInput[]
+  }
+
+  export type BasketItemUncheckedUpdateManyWithoutPostNestedInput = {
+    create?: XOR<BasketItemCreateWithoutPostInput, BasketItemUncheckedCreateWithoutPostInput> | BasketItemCreateWithoutPostInput[] | BasketItemUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: BasketItemCreateOrConnectWithoutPostInput | BasketItemCreateOrConnectWithoutPostInput[]
+    upsert?: BasketItemUpsertWithWhereUniqueWithoutPostInput | BasketItemUpsertWithWhereUniqueWithoutPostInput[]
+    createMany?: BasketItemCreateManyPostInputEnvelope
+    set?: BasketItemWhereUniqueInput | BasketItemWhereUniqueInput[]
+    disconnect?: BasketItemWhereUniqueInput | BasketItemWhereUniqueInput[]
+    delete?: BasketItemWhereUniqueInput | BasketItemWhereUniqueInput[]
+    connect?: BasketItemWhereUniqueInput | BasketItemWhereUniqueInput[]
+    update?: BasketItemUpdateWithWhereUniqueWithoutPostInput | BasketItemUpdateWithWhereUniqueWithoutPostInput[]
+    updateMany?: BasketItemUpdateManyWithWhereWithoutPostInput | BasketItemUpdateManyWithWhereWithoutPostInput[]
+    deleteMany?: BasketItemScalarWhereInput | BasketItemScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutBasketInput = {
@@ -10836,12 +10990,26 @@ export namespace Prisma {
     connect?: BasketWhereUniqueInput
   }
 
+  export type PostCreateNestedOneWithoutBasketItemsInput = {
+    create?: XOR<PostCreateWithoutBasketItemsInput, PostUncheckedCreateWithoutBasketItemsInput>
+    connectOrCreate?: PostCreateOrConnectWithoutBasketItemsInput
+    connect?: PostWhereUniqueInput
+  }
+
   export type BasketUpdateOneRequiredWithoutItemsNestedInput = {
     create?: XOR<BasketCreateWithoutItemsInput, BasketUncheckedCreateWithoutItemsInput>
     connectOrCreate?: BasketCreateOrConnectWithoutItemsInput
     upsert?: BasketUpsertWithoutItemsInput
     connect?: BasketWhereUniqueInput
     update?: XOR<XOR<BasketUpdateToOneWithWhereWithoutItemsInput, BasketUpdateWithoutItemsInput>, BasketUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type PostUpdateOneRequiredWithoutBasketItemsNestedInput = {
+    create?: XOR<PostCreateWithoutBasketItemsInput, PostUncheckedCreateWithoutBasketItemsInput>
+    connectOrCreate?: PostCreateOrConnectWithoutBasketItemsInput
+    upsert?: PostUpsertWithoutBasketItemsInput
+    connect?: PostWhereUniqueInput
+    update?: XOR<XOR<PostUpdateToOneWithWhereWithoutBasketItemsInput, PostUpdateWithoutBasketItemsInput>, PostUncheckedUpdateWithoutBasketItemsInput>
   }
 
   export type UserCreateNestedOneWithoutOrdersInput = {
@@ -11169,6 +11337,7 @@ export namespace Prisma {
     imageUrl: string
     price: number
     published?: boolean
+    basketItems?: BasketItemCreateNestedManyWithoutPostInput
   }
 
   export type PostUncheckedCreateWithoutAuthorInput = {
@@ -11178,6 +11347,7 @@ export namespace Prisma {
     imageUrl: string
     price: number
     published?: boolean
+    basketItems?: BasketItemUncheckedCreateNestedManyWithoutPostInput
   }
 
   export type PostCreateOrConnectWithoutAuthorInput = {
@@ -11238,6 +11408,34 @@ export namespace Prisma {
     create: XOR<AdminCreateWithoutPostsInput, AdminUncheckedCreateWithoutPostsInput>
   }
 
+  export type BasketItemCreateWithoutPostInput = {
+    id?: string
+    title: string
+    imageUrl: string
+    price: number
+    quantity?: number
+    basket: BasketCreateNestedOneWithoutItemsInput
+  }
+
+  export type BasketItemUncheckedCreateWithoutPostInput = {
+    id?: string
+    basketId: string
+    title: string
+    imageUrl: string
+    price: number
+    quantity?: number
+  }
+
+  export type BasketItemCreateOrConnectWithoutPostInput = {
+    where: BasketItemWhereUniqueInput
+    create: XOR<BasketItemCreateWithoutPostInput, BasketItemUncheckedCreateWithoutPostInput>
+  }
+
+  export type BasketItemCreateManyPostInputEnvelope = {
+    data: BasketItemCreateManyPostInput | BasketItemCreateManyPostInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AdminUpsertWithoutPostsInput = {
     update: XOR<AdminUpdateWithoutPostsInput, AdminUncheckedUpdateWithoutPostsInput>
     create: XOR<AdminCreateWithoutPostsInput, AdminUncheckedCreateWithoutPostsInput>
@@ -11261,6 +11459,35 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type BasketItemUpsertWithWhereUniqueWithoutPostInput = {
+    where: BasketItemWhereUniqueInput
+    update: XOR<BasketItemUpdateWithoutPostInput, BasketItemUncheckedUpdateWithoutPostInput>
+    create: XOR<BasketItemCreateWithoutPostInput, BasketItemUncheckedCreateWithoutPostInput>
+  }
+
+  export type BasketItemUpdateWithWhereUniqueWithoutPostInput = {
+    where: BasketItemWhereUniqueInput
+    data: XOR<BasketItemUpdateWithoutPostInput, BasketItemUncheckedUpdateWithoutPostInput>
+  }
+
+  export type BasketItemUpdateManyWithWhereWithoutPostInput = {
+    where: BasketItemScalarWhereInput
+    data: XOR<BasketItemUpdateManyMutationInput, BasketItemUncheckedUpdateManyWithoutPostInput>
+  }
+
+  export type BasketItemScalarWhereInput = {
+    AND?: BasketItemScalarWhereInput | BasketItemScalarWhereInput[]
+    OR?: BasketItemScalarWhereInput[]
+    NOT?: BasketItemScalarWhereInput | BasketItemScalarWhereInput[]
+    id?: StringFilter<"BasketItem"> | string
+    basketId?: StringFilter<"BasketItem"> | string
+    postId?: StringFilter<"BasketItem"> | string
+    title?: StringFilter<"BasketItem"> | string
+    imageUrl?: StringFilter<"BasketItem"> | string
+    price?: IntFilter<"BasketItem"> | number
+    quantity?: IntFilter<"BasketItem"> | number
   }
 
   export type UserCreateWithoutBasketInput = {
@@ -11290,10 +11517,12 @@ export namespace Prisma {
     imageUrl: string
     price: number
     quantity?: number
+    post: PostCreateNestedOneWithoutBasketItemsInput
   }
 
   export type BasketItemUncheckedCreateWithoutBasketInput = {
     id?: string
+    postId: string
     title: string
     imageUrl: string
     price: number
@@ -11353,18 +11582,6 @@ export namespace Prisma {
     data: XOR<BasketItemUpdateManyMutationInput, BasketItemUncheckedUpdateManyWithoutBasketInput>
   }
 
-  export type BasketItemScalarWhereInput = {
-    AND?: BasketItemScalarWhereInput | BasketItemScalarWhereInput[]
-    OR?: BasketItemScalarWhereInput[]
-    NOT?: BasketItemScalarWhereInput | BasketItemScalarWhereInput[]
-    id?: StringFilter<"BasketItem"> | string
-    basketId?: StringFilter<"BasketItem"> | string
-    title?: StringFilter<"BasketItem"> | string
-    imageUrl?: StringFilter<"BasketItem"> | string
-    price?: IntFilter<"BasketItem"> | number
-    quantity?: IntFilter<"BasketItem"> | number
-  }
-
   export type BasketCreateWithoutItemsInput = {
     id?: string
     user: UserCreateNestedOneWithoutBasketInput
@@ -11378,6 +11595,31 @@ export namespace Prisma {
   export type BasketCreateOrConnectWithoutItemsInput = {
     where: BasketWhereUniqueInput
     create: XOR<BasketCreateWithoutItemsInput, BasketUncheckedCreateWithoutItemsInput>
+  }
+
+  export type PostCreateWithoutBasketItemsInput = {
+    id?: string
+    title: string
+    content?: string | null
+    imageUrl: string
+    price: number
+    published?: boolean
+    author: AdminCreateNestedOneWithoutPostsInput
+  }
+
+  export type PostUncheckedCreateWithoutBasketItemsInput = {
+    id?: string
+    title: string
+    content?: string | null
+    imageUrl: string
+    price: number
+    published?: boolean
+    authorId: string
+  }
+
+  export type PostCreateOrConnectWithoutBasketItemsInput = {
+    where: PostWhereUniqueInput
+    create: XOR<PostCreateWithoutBasketItemsInput, PostUncheckedCreateWithoutBasketItemsInput>
   }
 
   export type BasketUpsertWithoutItemsInput = {
@@ -11399,6 +11641,37 @@ export namespace Prisma {
   export type BasketUncheckedUpdateWithoutItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PostUpsertWithoutBasketItemsInput = {
+    update: XOR<PostUpdateWithoutBasketItemsInput, PostUncheckedUpdateWithoutBasketItemsInput>
+    create: XOR<PostCreateWithoutBasketItemsInput, PostUncheckedCreateWithoutBasketItemsInput>
+    where?: PostWhereInput
+  }
+
+  export type PostUpdateToOneWithWhereWithoutBasketItemsInput = {
+    where?: PostWhereInput
+    data: XOR<PostUpdateWithoutBasketItemsInput, PostUncheckedUpdateWithoutBasketItemsInput>
+  }
+
+  export type PostUpdateWithoutBasketItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    price?: IntFieldUpdateOperationsInput | number
+    published?: BoolFieldUpdateOperationsInput | boolean
+    author?: AdminUpdateOneRequiredWithoutPostsNestedInput
+  }
+
+  export type PostUncheckedUpdateWithoutBasketItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    price?: IntFieldUpdateOperationsInput | number
+    published?: BoolFieldUpdateOperationsInput | boolean
+    authorId?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserCreateWithoutOrdersInput = {
@@ -11613,6 +11886,7 @@ export namespace Prisma {
     imageUrl?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     published?: BoolFieldUpdateOperationsInput | boolean
+    basketItems?: BasketItemUpdateManyWithoutPostNestedInput
   }
 
   export type PostUncheckedUpdateWithoutAuthorInput = {
@@ -11622,6 +11896,7 @@ export namespace Prisma {
     imageUrl?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     published?: BoolFieldUpdateOperationsInput | boolean
+    basketItems?: BasketItemUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type PostUncheckedUpdateManyWithoutAuthorInput = {
@@ -11633,8 +11908,45 @@ export namespace Prisma {
     published?: BoolFieldUpdateOperationsInput | boolean
   }
 
+  export type BasketItemCreateManyPostInput = {
+    id?: string
+    basketId: string
+    title: string
+    imageUrl: string
+    price: number
+    quantity?: number
+  }
+
+  export type BasketItemUpdateWithoutPostInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    price?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    basket?: BasketUpdateOneRequiredWithoutItemsNestedInput
+  }
+
+  export type BasketItemUncheckedUpdateWithoutPostInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    basketId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    price?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type BasketItemUncheckedUpdateManyWithoutPostInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    basketId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    price?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+  }
+
   export type BasketItemCreateManyBasketInput = {
     id?: string
+    postId: string
     title: string
     imageUrl: string
     price: number
@@ -11647,10 +11959,12 @@ export namespace Prisma {
     imageUrl?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
+    post?: PostUpdateOneRequiredWithoutBasketItemsNestedInput
   }
 
   export type BasketItemUncheckedUpdateWithoutBasketInput = {
     id?: StringFieldUpdateOperationsInput | string
+    postId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
@@ -11659,6 +11973,7 @@ export namespace Prisma {
 
   export type BasketItemUncheckedUpdateManyWithoutBasketInput = {
     id?: StringFieldUpdateOperationsInput | string
+    postId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number

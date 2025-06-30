@@ -61,4 +61,6 @@ export async function createOrder(formData: FormData) {
         },
     });
 
+    redirect('/orders');
+
 }

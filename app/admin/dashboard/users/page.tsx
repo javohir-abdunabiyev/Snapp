@@ -1,5 +1,6 @@
 import ClientBanButton from "@/components/custom/ClientBanButton";
 import prisma from "@/lib/prisma";
+import { getTranslations } from "next-intl/server";
 
 export default async function User() {
     const users = await prisma.user.findMany({
@@ -13,6 +14,7 @@ export default async function User() {
         },
     });
 
+    const t = await getTranslations("adminUsers")
 
 
     return (
@@ -42,8 +44,8 @@ export default async function User() {
                                 className="!max-w-[100px] !max-h-[100px] rounded-full"
                             />
                             <div className="text-sm mt-1 font-bold text-right">
-                                <p>🛒 Basket: {user.basket?.items.length ?? 0}</p>
-                                <p>📦 Orders: {user.orders.length}</p>
+                                <p>🛒 {t("basket")}: {user.basket?.items.length ?? 0}</p>
+                                <p>📦 {t("orders")}: {user.orders.length}</p>
                             </div>
                         </div>
                     </span>

@@ -35,7 +35,7 @@ export default async function RootLayout({
               <LoginBtn />
               <SwitchLang />
               <a href="#">
-                <button className="bg-[#ff90e8] h-[80px] w-[135px] text-[25px] font-bold cursor-pointer">{t('about')}</button>
+                <button className="bg-[#ff90e8] h-[80px] pl-[10px] pr-[10px] text-[25px] font-bold cursor-pointer">{t("support")}</button>
               </a>
             </nav>
           </header>

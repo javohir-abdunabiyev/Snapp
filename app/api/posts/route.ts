@@ -1,7 +1,5 @@
-// app/api/posts/route.ts
-
 import { NextResponse } from "next/server";
-import prisma from "@/lib/prisma"; // убедитесь, что путь правильный
+import prisma from "@/lib/prisma";
 
 export async function GET() {
   try {

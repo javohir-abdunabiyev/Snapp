@@ -26,14 +26,15 @@ model Admin {
 }
 
 model Post {
-  id        String  @id @default(uuid())
-  title     String
-  content   String?
-  imageUrl  String
-  price     Int
-  published Boolean @default(true)
-  authorId  String
-  author    Admin   @relation("AdminPosts", fields: [authorId], references: [id])
+  id          String  @id @default(uuid())
+  title       String
+  content     String?
+  imageUrl    String
+  price       Int
+  published   Boolean @default(true)
+  authorId    String
+  author      Admin   @relation("AdminPosts", fields: [authorId], references: [id])
+  basketItems BasketItem[]
 }
 
 model Basket {
@@ -46,18 +47,22 @@ model Basket {
 model BasketItem {
   id       String  @id @default(uuid())
   basketId String
+  basket   Basket  @relation(fields: [basketId], references: [id], onDelete: Cascade)
+  postId   String
+  post     Post    @relation(fields: [postId], references: [id], onDelete: Cascade)
   title    String
   imageUrl String
   price    Int
-  quantity Int    @default(1)
-  basket   Basket @relation(fields: [basketId], references: [id], onDelete: Cascade)
+  quantity Int     @default(1)
 }
+
+
 
 
 model Order {
   id        String       @id @default(uuid())
-  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   items     OrderItem[]
   createdAt DateTime     @default(now())
   status    String       @default("PENDING")
@@ -66,13 +71,12 @@ model Order {
   total     Int          @default(0)
 }
 
-
 model OrderItem {
-  id       String @id @default(uuid())
-  orderId  String
-  title    String
-  imageUrl String
-  price    Int
-  quantity Int
-  order    Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  id        String @id @default(uuid())
+  orderId   String
+  order     Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  title     String
+  imageUrl  String
+  price     Int
+  quantity  Int
 }

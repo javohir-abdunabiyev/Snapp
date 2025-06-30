@@ -37,20 +37,22 @@ export async function POST(req: Request) {
         return NextResponse.json({ error: "Post not found" }, { status: 404 });
     }
 
+    // 👇 Новый способ: проверка по postId
     const existingItem = await prisma.basketItem.findFirst({
         where: {
             basketId: basket.id,
-            title: post.title,
+            postId: post.id,
         },
     });
 
     if (existingItem) {
-        return NextResponse.json({ success: true });
+        return NextResponse.json({ success: true, basketItemId: existingItem.id });
     }
 
-    await prisma.basketItem.create({
+    const newItem = await prisma.basketItem.create({
         data: {
             basketId: basket.id,
+            postId: post.id,
             title: post.title,
             imageUrl: post.imageUrl,
             price: post.price,
@@ -58,5 +60,5 @@ export async function POST(req: Request) {
         },
     });
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, basketItemId: newItem.id });
 }
