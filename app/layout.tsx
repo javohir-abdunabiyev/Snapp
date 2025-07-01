@@ -33,8 +33,8 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang={locale} className="h-full">
-      <body className="flex flex-col min-h-screen">
+    <html lang={locale}>
+      <body>
         <SessionProvider session={sereverSession}>
           <header className="flex items-center pl-[2rem] justify-between h-[80px] w-full bg-black">
             <a href="/">
@@ -76,7 +76,7 @@ export default async function RootLayout({
             <div className="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row justify-between items-center gap-6">
               <div className="text-center md:text-left">
                 <h2 className="text-white text-xl font-semibold">Snapp</h2>
-                <p className="text-sm mt-1">© {new Date().getFullYear()} {f("rights")}</p>
+                <p className="text-sm mt-1">©{f("rights")}</p>
               </div>
 
               <div className="flex flex-wrap justify-center gap-6 text-sm">
