@@ -26,14 +26,15 @@ model Admin {
 }
 
 model Post {
-  id        String  @id @default(uuid())
-  title     String
-  content   String?
-  imageUrl  String
-  price     Int
-  published Boolean @default(true)
-  authorId  String
-  author    Admin   @relation("AdminPosts", fields: [authorId], references: [id])
+  id          String       @id @default(uuid())
+  title       String
+  content     String?
+  imageUrl    String
+  price       Int
+  published   Boolean      @default(true)
+  authorId    String
+  author      Admin        @relation("AdminPosts", fields: [authorId], references: [id])
+  basketItems BasketItem[]
 }
 
 model Basket {
@@ -47,6 +48,8 @@ model BasketItem {
   id       String @id @default(uuid())
   basketId String
   basket   Basket @relation(fields: [basketId], references: [id], onDelete: Cascade)
+  postId   String
+  post     Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
   title    String
   imageUrl String
   price    Int
