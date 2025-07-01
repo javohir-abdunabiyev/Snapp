@@ -100,7 +100,7 @@ export default function ProductPage({
     if (!product) return null;
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-[#1a1a1a] to-[#111] py-10 px-4">
+        <div className="min-h-screen bg-gradient-to-br py-10 px-4">
             <div className="max-w-6xl mx-auto">
                 <Link
                     href="/"

@@ -170,7 +170,7 @@ export default function BasketPage() {
 
                     {isBanned && (
                         <div className="fixed bottom-[40px] right-[20px] text-red-500 font-semibold">
-                            {t("banned")}
+                            {t("Banned")}
                         </div>
                     )}
                 </div>

@@ -79,7 +79,7 @@ export default function HomePageClient() {
                 </div>
             </div>
 
-            <div className="grid grid-cols-4 mt-[30px] gap-4">
+            <div className="grid grid-cols-4 lg:grid-cols-4 sm:grid-cols-1 mt-[30px] gap-4">
                 {filteredPosts.map((post) => (
                     <PostCard key={post.id} post={post} isAuth={isAuth} />
                 ))}

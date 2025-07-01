@@ -97,5 +97,24 @@
         "postContent": "Post content",
         "postPrice": "Post price in $ (dollars)",
         "addPost": "Add Post"
+    },
+    "profile": {
+        "back": "Back to products",
+        "editProfile": "Edit Profile",
+        "status": "Status",
+        "ban": "Banned",
+        "active": "Active",
+        "productsInBasket": "Products in basket",
+        "orders": "Orders",
+        "support": "Support",
+        "editUsername": "Edit Username",
+        "saving": "Saving...",
+        "save": "Save"
+    },
+    "footer": {
+        "home": "Home",
+        "support": "Support",
+        "contact": "Contact:",
+        "rights": "Snapp. All rights reserved."
     }
 }
