@@ -5,6 +5,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Snapp — интернет-магазин в Самарканде",
   description: "Покупайте товары с доставкой по Самарканду. Удобно, быстро и просто.",
+  other: {
+    "google-site-verification" : "PWvnbU8WPs42XIINuZUyqlgoUvGhqhUeWRFh1Rse4AI"
+  },
   keywords: ["Snapp", "интернет-магазин", "Самарканд", "доставка", "купить"],
   authors: [{ name: "Javohir", url: "https://snapp-one.vercel.app" }],
   openGraph: {
