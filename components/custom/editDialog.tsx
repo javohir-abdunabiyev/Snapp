@@ -8,12 +8,18 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "../ui/button";
-import { use, useState } from "react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 
-export function EditDialog({ post, onUpdate }: { post: any; onUpdate: (post: any) => void }) {
+export function EditDialog({
+    post,
+    onUpdate,
+}: {
+    post: any;
+    onUpdate: (post: any) => void;
+}) {
     const [title, setTitle] = useState(post.title);
-    const [content, setContent] = useState(post.content);
+    const [content, setContent] = useState(post.content ?? "");
     const [price, setPrice] = useState(post.price);
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
@@ -27,11 +33,9 @@ export function EditDialog({ post, onUpdate }: { post: any; onUpdate: (post: any
 
         setLoading(true);
 
-        const res = await fetch(`/api/posts/${post.id}`, {
+        const res = await fetch(`/api/posts/${post.id}/edit/`, {
             method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ title, content, price }),
         });
 
@@ -45,7 +49,6 @@ export function EditDialog({ post, onUpdate }: { post: any; onUpdate: (post: any
 
         setLoading(false);
     };
-
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
@@ -82,7 +85,7 @@ export function EditDialog({ post, onUpdate }: { post: any; onUpdate: (post: any
                         className="relative flex items-center rounded-[8px] justify-center w-full h-[40px] cursor-pointer hover:bg-[#ff90e8]"
                     >
                         <span className="rounded-[8px] flex items-center h-[40px] justify-center bg-black text-white !w-full transform transition-all duration-150 ease-in-out hover:translate-x-[-0.3rem] hover:translate-y-[-0.3rem]">
-                            {loading ? `${t("saving")}` : `${t("saveChanges")}`}
+                            {loading ? t("saving") : t("saveChanges")}
                         </span>
                     </button>
                 </div>

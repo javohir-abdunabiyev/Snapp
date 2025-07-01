@@ -5,9 +5,12 @@ export async function PATCH(
     req: Request,
     { params }: { params: { id: string } }
 ) {
+    const { id } = params;
+
+
     try {
         const user = await prisma.user.findUnique({
-            where: { id: params.id },
+            where: { id },
         });
 
         if (!user) {
@@ -15,7 +18,7 @@ export async function PATCH(
         }
 
         const updatedUser = await prisma.user.update({
-            where: { id: params.id },
+            where: { id },
             data: {
                 ban: !user.ban,
             },
