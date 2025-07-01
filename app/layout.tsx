@@ -1,3 +1,4 @@
+// app/layout.tsx
 import { NextIntlClientProvider } from "next-intl";
 import "./globals.css";
 import { getLocale, getTranslations } from "next-intl/server";
@@ -34,7 +35,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body>
+      <body className="flex flex-col min-h-screen">
         <SessionProvider session={sereverSession}>
           <header className="flex items-center pl-[2rem] justify-between h-[80px] w-full bg-black">
             <a href="/">
@@ -42,7 +43,7 @@ export default async function RootLayout({
             </a>
             <nav className="flex items-center gap-[25px]">
               <a href="/">
-                <Button className="text-[18px] cursor-pointer rounded-[9999px] flex bg-[] hover:border-[0.0625rem] hover:border-solid hover:bg-[] p-[25px]">
+                <Button className="text-[18px] cursor-pointer rounded-[9999px] flex hover:border-[0.0625rem] p-[25px]">
                   {t("home")}
                 </Button>
               </a>
@@ -62,7 +63,7 @@ export default async function RootLayout({
               <SwitchLang />
 
               <a href="#">
-                <button className="bg-[#ff90e8] h-[80px] pl-[10px] pr-[10px] text-[25px] font-bold cursor-pointer">
+                <button className="bg-[#ff90e8] h-[80px] px-[10px] text-[25px] font-bold cursor-pointer">
                   {t("support")}
                 </button>
               </a>
@@ -72,11 +73,12 @@ export default async function RootLayout({
           <main className="flex-1">
             <NextIntlClientProvider>{children}</NextIntlClientProvider>
           </main>
-          <footer className="bg-black text-gray-400 border-t border-gray-800 mt-16">
+
+          <footer className="bg-black text-gray-400 border-t border-gray-800">
             <div className="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row justify-between items-center gap-6">
               <div className="text-center md:text-left">
                 <h2 className="text-white text-xl font-semibold">Snapp</h2>
-                <p className="text-sm mt-1">©{f("rights")}</p>
+                <p className="text-sm mt-1">© {f("rights")}</p>
               </div>
 
               <div className="flex flex-wrap justify-center gap-6 text-sm">
@@ -86,8 +88,6 @@ export default async function RootLayout({
               </div>
             </div>
           </footer>
-
-
         </SessionProvider>
       </body>
     </html>

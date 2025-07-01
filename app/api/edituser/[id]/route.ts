@@ -1,21 +1,26 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
-export async function PATCH(req: Request, { params }: { params: { id: string } }) {
-    const { id } = params;
-    const { name } = await req.json();
+export async function PATCH(
+    req: NextRequest,
+    { params }: { params: Promise<{ id: string }> }
+) {
+    const { id } = await params;
+    const data = await req.json();
 
-    if (!name || typeof name !== "string")
+    if (!data.name || typeof data.name !== "string") {
         return NextResponse.json({ error: "Invalid name" }, { status: 400 });
+    }
 
     try {
         const updatedUser = await prisma.user.update({
             where: { id },
-            data: { name },
+            data: { name: data.name },
         });
 
         return NextResponse.json(updatedUser);
     } catch (error) {
-        return NextResponse.json({ error: "Server error" }, { status: 500 });
+        console.error("Error updating user:", error);
+        return NextResponse.json({ error: "Failed to update user" }, { status: 500 });
     }
 }
