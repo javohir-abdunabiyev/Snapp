@@ -49,7 +49,7 @@ export default async function RootLayout({
                   <a href="/" className="hover:text-white transition">
                     {t("home")}
                   </a>
-                  <a href="#" className="hover:text-white transition">
+                  <a href="https://t.me/javohir_abdunabiyev" className="hover:text-white transition">
                     {t("support")}
                   </a>
                   <p className="hover:text-white transition">
