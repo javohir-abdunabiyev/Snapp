@@ -1,5 +1,3 @@
-// app/product/[id]/page.ts
-
 import { getServerSession } from "next-auth";
 import { getTranslations } from "next-intl/server";
 import ProductPage from "@/components/custom/productpage";

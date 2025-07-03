@@ -22,12 +22,9 @@ export default function Header({
 
     return (
         <header className="relative bg-black px-[30px] py-4 w-full flex items-center justify-between z-50">
-            {/* Логотип */}
             <a href="/">
                 <h2 className="text-[2.5rem] font-bold text-white">Snapp</h2>
             </a>
-
-            {/* DESKTOP */}
             <nav className="hidden sm:flex items-center gap-[25px]">
                 <a href="/">
                     <Button className="text-[18px] cursor-pointer rounded-[9999px] flex hover:border-[0.0625rem] p-[25px]">
@@ -49,7 +46,7 @@ export default function Header({
                 )}
 
                 <SwitchLang />
-                <a href="#">
+                <a href="https://t.me/javohir_abdunabiyev">
                     <button className="bg-[#ff90e8] h-[80px] px-[10px] text-[25px] font-bold cursor-pointer">
                         {t("support")}
                     </button>
@@ -58,7 +55,6 @@ export default function Header({
             </nav>
 
 
-            {/* MOBILE right block */}
             <div className="flex items-center sm:hidden gap-3">
                 <SwitchLang />
 
@@ -80,7 +76,6 @@ export default function Header({
                 </button>
             </div>
 
-            {/* BACKDROP */}
             {isOpen && (
                 <div
                     className="fixed inset-0 bg-black/60 z-40"
@@ -88,7 +83,6 @@ export default function Header({
                 />
             )}
 
-            {/* MOBILE MENU */}
             <div
                 className={`fixed top-0 right-0 h-full w-[80%] max-w-[300px] bg-[#1a1a1a] z-50 flex flex-col p-6 gap-6 shadow-lg transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"
                     }`}
