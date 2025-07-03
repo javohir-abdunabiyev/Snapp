@@ -37,7 +37,6 @@ export async function POST(req: Request) {
         return NextResponse.json({ error: "Post not found" }, { status: 404 });
     }
 
-    // 👇 Новый способ: проверка по postId
     const existingItem = await prisma.basketItem.findFirst({
         where: {
             basketId: basket.id,

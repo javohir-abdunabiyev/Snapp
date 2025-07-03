@@ -93,7 +93,7 @@ export default function BasketPage() {
             }
 
             setOrderSuccess(true);
-            setItems([]); // очистить корзину
+            setItems([]);
         } catch (error: any) {
             setOrderError(error.message);
         } finally {
