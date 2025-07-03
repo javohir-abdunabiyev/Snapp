@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { SlBasket } from "react-icons/sl";
 import { FaTrash } from "react-icons/fa";
 import Link from "next/link";
+import { Loader2 } from "lucide-react";
 
 type Product = {
     id: string;
@@ -33,13 +34,19 @@ export default function ProductPage({
     const [product, setProduct] = useState<Product | null>(null);
     const [inBasket, setInBasket] = useState(false);
     const [basketItemId, setBasketItemId] = useState<string | null>(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchProduct = async () => {
+            setLoading(true);
             const res = await fetch(`/api/product/${id}`);
-            if (!res.ok) return;
+            if (!res.ok) {
+                setLoading(false);
+                return;
+            }
             const data = await res.json();
             setProduct(data.product);
+            setLoading(false);
         };
 
         const checkBasket = async () => {
@@ -47,10 +54,8 @@ export default function ProductPage({
                 cache: "no-store",
                 credentials: "include",
             });
-
             const data = await res.json();
             const found = data.items.find((item: any) => item.postId === id);
-
             if (found) {
                 setInBasket(true);
                 setBasketItemId(found.id);
@@ -97,7 +102,14 @@ export default function ProductPage({
         }
     };
 
-    if (!product) return null;
+    if (loading)
+        return (
+            <div className="flex justify-center items-center h-[300px]">
+                <Loader2 className="animate-spin w-10 h-10 text-gray-400" />
+            </div>
+        );
+
+    if (!product) return <div className="min-h-screen flex items-center justify-center text-white">Product not found</div>;
 
     return (
         <div className="min-h-screen bg-gradient-to-br py-10 px-4">
@@ -114,7 +126,7 @@ export default function ProductPage({
                         <img
                             src={product.imageUrl}
                             alt={product.title}
-                            draggable="false"
+                            draggable={false}
                             className="w-full h-[300px] object-contain rounded-md"
                         />
                     </div>

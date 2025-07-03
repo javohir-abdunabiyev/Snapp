@@ -1,4 +1,3 @@
-// app/page.tsx
 import HomePageClient from "@/components/custom/homepageclient";
 import type { Metadata } from "next";
 
